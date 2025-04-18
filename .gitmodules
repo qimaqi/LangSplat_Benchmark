@@ -7,3 +7,6 @@
 [submodule "submodules/langsplat-rasterization"]
 	path = submodules/langsplat-rasterization
 	url = https://github.com/minghanqin/langsplat-rasterization
+[submodule "renderpy"]
+	path = renderpy
+	url = https://github.com/liu115/renderpy

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=run_lang_splat_10_20
-#SBATCH --output=sbatch_log/run_lang_splat_10_20_%j.out
+#SBATCH --job-name=run_lang_splat_30_40
+#SBATCH --output=sbatch_log/run_lang_splat_30_40_%j.out
 #SBATCH --nodes=1
 #SBATCH --time=48:00:00
 #SBATCH --gres=gpu:1
@@ -22,4 +22,4 @@ export CXX=/scratch_net/schusch/qimaqi/install_gcc_8_5/bin/g++-8.5.0
 
 cd /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/
 
-python langsplat_jobs.py --start_idx=10 --end_idx=12 --port 55556
+python langsplat_jobs.py --start_idx=30 --end_idx=32 --port 55558

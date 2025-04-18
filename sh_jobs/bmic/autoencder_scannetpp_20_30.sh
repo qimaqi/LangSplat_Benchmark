@@ -13,7 +13,7 @@
 
 
 source /scratch_net/schusch/qimaqi/miniconda3/etc/profile.d/conda.sh
-conda activate langsplat
+conda activate langsplat_cu18_test
 
 cd /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/autoencoder
 # python preprocess.py --dataset_path /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/data/lerf_ovs/ramen

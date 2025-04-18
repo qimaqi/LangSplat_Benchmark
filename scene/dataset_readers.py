@@ -663,12 +663,15 @@ def readScanNetppInfo(path, white_background, depths, eval, lang_path, llff_hold
     # print("Reading Test Transforms")
     # test_cam_infos = readCamerasFromTransforms_nerfstudio(path, lang_path, depths_folder, white_background, True, extension)
     
-    # if not eval:
-    #     train_cam_infos.extend(test_cam_infos)
-    #     test_cam_infos = []
-    # else:
-    train_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold != 0]
-    test_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold == 0]
+    if not eval:
+        train_cam_infos = all_cam_infos
+        test_cam_infos = []
+    else:
+        train_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold != 0]
+        test_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold == 0]
+
+    # train_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold != 0]
+    # test_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold == 0]
 
     nerf_normalization = getNerfppNorm(train_cam_infos)
 

@@ -15,3 +15,9 @@ ckpts/
 output/
 */sbatch_log/
 assets/
+autoencoder/ckpt_bak/
+output_test_split
+output
+eval_result/
+eval_result_test_split/
+scripts/

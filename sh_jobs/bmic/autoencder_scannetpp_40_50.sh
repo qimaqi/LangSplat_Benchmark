@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=autoencder_scannetpp_0_10
-#SBATCH --output=sbatch_log/autoencder_scannetpp_0_10_%j.out
+#SBATCH --job-name=autoencder_scannetpp_40_50
+#SBATCH --output=sbatch_log/autoencder_scannetpp_40_50_%j.out
 #SBATCH --nodes=1
 #SBATCH --time=48:00:00
 #SBATCH --gres=gpu:1
@@ -18,5 +18,4 @@ conda activate langsplat_cu18_test
 cd /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/autoencoder
 # python preprocess.py --dataset_path /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/data/lerf_ovs/ramen
 
-# python autoencoder_jobs.py  --start_idx 0 --end_idx 10
-python autoencoder_jobs.py  --start_idx 0 --end_idx 1
+python autoencoder_jobs.py  --start_idx 40 --end_idx 50 --port 55558

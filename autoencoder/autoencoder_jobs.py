@@ -108,6 +108,7 @@ if __name__ == "__main__":
              
 
         output_langauge_features = os.path.join(source_path, 'language_features_dim3')
+        # shutil.rmtree(output_langauge_features, ignore_errors=True)
         # if os.path.exists(output_langauge_features) and len(os.listdir(output_langauge_features)) > 0:
         #     print("output_langauge_features exists", output_langauge_features)
         #     continue
@@ -116,7 +117,7 @@ if __name__ == "__main__":
         if not os.path.exists(os.path.join('/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/neurips_2025/LangSplat_Qi/autoencoder/ckpt', val_name_i, 'best_ckpt.pth')):
             command = "python train.py --dataset_path {} --encoder_dims 256 128 64 32 3 --decoder_dims 16 32 64 128 256 256 512 --lr 0.0007 --dataset_name {}".format(source_path, val_name_i)
             print("command", command)
-            # os.system(command) 
+            os.system(command) 
         else:
             print("Trianing finish already", val_name_i)
 
@@ -124,7 +125,7 @@ if __name__ == "__main__":
         if not (os.path.exists(output_langauge_features) and len(os.listdir(output_langauge_features)) > 0) :
             test_command = "python test.py --dataset_path {} --dataset_name {}".format(source_path, val_name_i)
             print("test_command", test_command)
-            # os.system(test_command)
+            os.system(test_command)
         else:
             print("Testing finish already", val_name_i)
 

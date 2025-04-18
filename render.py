@@ -34,6 +34,8 @@ def render_set(model_path, source_path, name, iteration, views, gaussians, pipel
 
     for idx, view in enumerate(tqdm(views, desc="Rendering progress")):
         output = render(view, gaussians, pipeline, background, args)
+        # print("view", view.image_name)
+        image_name = view.image_name
 
         if not args.include_feature:
             rendering = output["render"]
@@ -46,13 +48,19 @@ def render_set(model_path, source_path, name, iteration, views, gaussians, pipel
         else:
             gt, mask = view.get_language_feature(os.path.join(source_path, args.language_features_name), feature_level=args.feature_level)
 
-        np.save(os.path.join(render_npy_path, '{0:05d}'.format(idx) + ".npy"),rendering.permute(1,2,0).cpu().numpy())
-        np.save(os.path.join(gts_npy_path, '{0:05d}'.format(idx) + ".npy"),gt.permute(1,2,0).cpu().numpy())
-        torchvision.utils.save_image(rendering, os.path.join(render_path, '{0:05d}'.format(idx) + ".png"))
-        torchvision.utils.save_image(gt, os.path.join(gts_path, '{0:05d}'.format(idx) + ".png"))
+        np.save(os.path.join(render_npy_path, image_name + ".npy"),rendering.permute(1,2,0).cpu().numpy())
+        np.save(os.path.join(gts_npy_path, image_name + ".npy"),gt.permute(1,2,0).cpu().numpy())
+        torchvision.utils.save_image(rendering, os.path.join(render_path, image_name + ".png"))
+        torchvision.utils.save_image(gt, os.path.join(gts_path, image_name + ".png"))
+
+        # np.save(os.path.join(render_npy_path, '{0:05d}'.format(idx) + ".npy"),rendering.permute(1,2,0).cpu().numpy())
+        # np.save(os.path.join(gts_npy_path, '{0:05d}'.format(idx) + ".npy"),gt.permute(1,2,0).cpu().numpy())
+        # torchvision.utils.save_image(rendering, os.path.join(render_path, '{0:05d}'.format(idx) + ".png"))
+        # torchvision.utils.save_image(gt, os.path.join(gts_path, '{0:05d}'.format(idx) + ".png"))
                
 def render_sets(dataset : ModelParams, iteration : int, pipeline : PipelineParams, skip_train : bool, skip_test : bool, args):
     with torch.no_grad():
+
         gaussians = GaussianModel(dataset.sh_degree)
         scene = Scene(dataset, gaussians, shuffle=False)
         checkpoint = os.path.join(args.model_path, 'chkpnt30000.pth')
